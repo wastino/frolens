@@ -18,11 +18,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "frolens by Winston",
-  description: "Photography — portraits, street, lifestyle. Warsaw.",
+  title: "Frolens by Winston — Portrait, Street & Fashion Photography",
+  description:
+    "Frolens by Winston — portrait, street, and fashion photography based in Germany and available internationally. Available for portrait sessions, fashion projects, editorial work, and commercial collaborations.",
   openGraph: {
-    title: "frolens by Winston",
-    description: "Photography — portraits, street, lifestyle.",
+    title: "Frolens by Winston — Portrait, Street & Fashion Photography",
+    description:
+      "Portrait, street, and fashion photography based in Germany and available internationally.",
     type: "website",
   },
 };

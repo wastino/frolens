@@ -1,9 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",   // generates a static /out folder — hostable anywhere
+  serverExternalPackages: ["pg"],
   images: {
-    unoptimized: true, // required for static export (no Next.js image server)
+    remotePatterns: [
+      { protocol: "https", hostname: "*.ionoscloud.com" },
+    ],
   },
 };
 

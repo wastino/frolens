@@ -1,137 +1,67 @@
-export type Category = "all" | "portraits" | "street" | "lifestyle";
+export type PhotoCategory =
+  | "portraits"
+  | "street"
+  | "fashion"
+  | "corporate"
+  | "editorial"
+  | "family"
+  | "newborn";
+export type PrintSize = "A4" | "A3" | "A2" | "A1";
+export type SizeMap<T> = { A4: T; A3: T; A2: T; A1: T };
+
+export interface ShopPhoto extends Photo {
+  s3Key: string;
+  prices: SizeMap<number>;
+  discountPct: number;
+  editions: SizeMap<number | null> | null;
+  sold: SizeMap<number>;
+}
+export type Category = "all" | PhotoCategory;
 
 export interface Photo {
   id: string;
   src: string;
   alt: string;
-  category: Exclude<Category, "all">;
-  aspect: "portrait" | "landscape" | "square";
-  featured?: boolean;
+  category: PhotoCategory;
+  printable: boolean;
 }
 
-export const photos: Photo[] = [
-  // ── PORTRAITS — green jacket / flowers series ────────────────────────────
-  {
-    id: "p1",
-    src: "/work/portraits/01.jpg",
-    alt: "Portrait with flowers",
-    category: "portraits",
-    aspect: "portrait",
-  },
-  {
-    id: "p2",
-    src: "/work/portraits/02.jpg",
-    alt: "Portrait — looking away",
-    category: "portraits",
-    aspect: "landscape",
-    featured: true,          // wide editorial shot, gets extra grid width
-  },
-  {
-    id: "p3",
-    src: "/work/portraits/03.jpg",
-    alt: "Portrait — full length",
-    category: "portraits",
-    aspect: "portrait",
-  },
-  {
-    id: "p4",
-    src: "/work/portraits/04.jpg",
-    alt: "Portrait — dynamic pose",
-    category: "portraits",
-    aspect: "portrait",
-    featured: true,          // striking skirt/movement shot
-  },
-
-  // ── LIFESTYLE — lipstick / candid series ─────────────────────────────────
-  {
-    id: "l1",
-    src: "/work/lifestyle/01.jpg",
-    alt: "Candid — golden light lipstick",
-    category: "lifestyle",
-    aspect: "landscape",
-    featured: true,          // strongest lipstick shot — warm cinematic light
-  },
-  {
-    id: "l2",
-    src: "/work/lifestyle/02.jpg",
-    alt: "Candid — laughing",
-    category: "lifestyle",
-    aspect: "landscape",
-  },
-  {
-    id: "l3",
-    src: "/work/lifestyle/03.jpg",
-    alt: "Candid — contemplative",
-    category: "lifestyle",
-    aspect: "landscape",
-  },
-
-  // ── LIFESTYLE — café window series ───────────────────────────────────────
-  {
-    id: "l4",
-    src: "/work/lifestyle/04.jpg",
-    alt: "Café — direct gaze through glass",
-    category: "lifestyle",
-    aspect: "landscape",
-    featured: true,          // best wide café composition
-  },
-  {
-    id: "l5",
-    src: "/work/lifestyle/05.jpg",
-    alt: "Café — warm light stare",
-    category: "lifestyle",
-    aspect: "landscape",
-  },
-  {
-    id: "l6",
-    src: "/work/lifestyle/06.jpg",
-    alt: "Café — hand to chin",
-    category: "lifestyle",
-    aspect: "portrait",
-  },
-
-  // ── STREET — Warsaw city ─────────────────────────────────────────────────
-  {
-    id: "s1",
-    src: "/work/street/01.jpg",
-    alt: "Warsaw — metro entrance",
-    category: "street",
-    aspect: "landscape",
-    featured: true,          // most striking geometric composition
-  },
-  {
-    id: "s2",
-    src: "/work/street/02.jpg",
-    alt: "Warsaw — glass architecture",
-    category: "street",
-    aspect: "landscape",
-  },
-  {
-    id: "s3",
-    src: "/work/street/03.jpg",
-    alt: "Warsaw — Palace of Culture",
-    category: "street",
-    aspect: "portrait",
-  },
-  {
-    id: "s4",
-    src: "/work/street/04.jpg",
-    alt: "Warsaw — monument at dusk",
-    category: "street",
-    aspect: "portrait",
-  },
-  {
-    id: "s5",
-    src: "/work/street/05.jpg",
-    alt: "Warsaw — Wola district",
-    category: "street",
-    aspect: "landscape",
-  },
+// Local fallback photos (used when S3 credentials are not configured)
+export const localPhotos: Photo[] = [
+  // PORTRAITS
+  { id: "p1", src: "/work/portraits/02.jpg", alt: "Woman with flowers, outdoor portrait — Frolens by Winston, Warsaw photography", category: "portraits", printable: true },
+  { id: "p2", src: "/work/portraits/03.jpg", alt: "Full-length editorial portrait — Frolens by Winston, Warsaw photography", category: "portraits", printable: true },
+  { id: "p3", src: "/work/lifestyle/04.jpg", alt: "Café window portrait, direct gaze — Frolens by Winston photography", category: "portraits", printable: true },
+  { id: "p4", src: "/work/lifestyle/06.jpg", alt: "Café portrait, contemplative — Frolens by Winston photography", category: "portraits", printable: true },
+  // STREET
+  { id: "s1", src: "/work/street/01.jpg", alt: "Warsaw metro entrance, symmetrical architecture — Frolens by Winston", category: "street", printable: true },
+  { id: "s2", src: "/work/street/02.jpg", alt: "Modern glass architecture, Warsaw Wola district — Frolens by Winston", category: "street", printable: true },
+  { id: "s3", src: "/work/street/03.jpg", alt: "Palace of Culture against blue sky, Warsaw — Frolens by Winston", category: "street", printable: true },
+  { id: "s4", src: "/work/street/05.jpg", alt: "Wola neon sign, arched building at dusk — Frolens by Winston, Warsaw", category: "street", printable: true },
+  // FASHION
+  { id: "f1", src: "/work/portraits/04.jpg", alt: "Woman dancing, billowing skirt — Frolens by Winston fashion photography", category: "fashion", printable: true },
+  { id: "f2", src: "/work/lifestyle/01.jpg", alt: "Woman applying lipstick, golden light — Frolens by Winston fashion photography", category: "fashion", printable: true },
+  { id: "f3", src: "/work/lifestyle/03.jpg", alt: "Candid portrait, contemplative moment — Frolens by Winston fashion photography", category: "fashion", printable: true },
+  { id: "f4", src: "/work/lifestyle/05.jpg", alt: "Café portrait, warm window light — Frolens by Winston fashion photography", category: "fashion", printable: true },
 ];
 
 export const categoryLabels: Record<Category, string> = {
   all: "All",
   portraits: "Portraits",
-  street: "Street",
-  lifestyle: "Lifestyle",
+  street: "Street Photography",
+  fashion: "Fashion Photography",
+  corporate: "Corporate",
+  editorial: "Editorial",
+  family: "Family",
+  newborn: "Newborn",
 };
+
+export const CATEGORY_ORDER: PhotoCategory[] = [
+  "portraits",
+  "corporate",
+  "editorial",
+  "family",
+  "newborn",
+  "street",
+  "fashion",
+];

@@ -50,6 +50,18 @@ export default function Hero() {
         }}
       />
 
+      {/* Subtle gradient behind text block for legibility */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "radial-gradient(ellipse 60% 55% at 50% 50%, rgba(0,0,0,0.3) 0%, transparent 100%)",
+          pointerEvents: "none",
+          zIndex: 1,
+        }}
+      />
+
       {/* Main content */}
       <div
         style={{
@@ -121,7 +133,7 @@ export default function Hero() {
             margin: "0 auto",
           }}
         >
-          Portraits · Street · Lifestyle
+          Portraits · Street Photography · Fashion Photography
         </p>
       </div>
 

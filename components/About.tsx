@@ -19,7 +19,7 @@ export default function About() {
         className="about-grid"
       >
         {/* Left — text */}
-        <div>
+        <div style={{ minWidth: 0 }}>
           <p
             style={{
               fontFamily: "var(--font-inter), system-ui, sans-serif",
@@ -69,10 +69,10 @@ export default function About() {
               maxWidth: "460px",
             }}
           >
-            I'm Winston — a photographer based in Mannheim, Germany, drawn to
-            the quiet drama of everyday moments. My work moves between editorial
-            portraiture, street photography, and lifestyle — wherever the light
-            and the story align.
+            I'm Winston — a Germany-based fashion and portrait photographer,
+            drawn to the quiet drama of everyday moments. My work moves between
+            editorial portraiture, street photography, and fashion photography —
+            wherever the light and the story align.
           </p>
 
           <p
@@ -85,8 +85,8 @@ export default function About() {
               maxWidth: "460px",
             }}
           >
-            Available for portrait sessions, editorial work, and brand
-            collaborations.
+            Available for portrait sessions, editorial work, fashion projects,
+            and international collaborations.
           </p>
         </div>
 
